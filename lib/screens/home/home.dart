@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import '../cats/cat.dart';
+import '../cats/cat_card.dart';
+import '../../models/cat.dart';
 
 class HomeScreen extends StatelessWidget {
   // Uses the cat api to display images of cats
-
+  final Future<List<Cat>> catsFuture = Cat.fetch10Cats();
   // Implementing the api
 
   @override
@@ -16,24 +17,9 @@ class HomeScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              CatCard(
-                Image.network(
-                  'https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg',
-                ),
-                '',
-              ),
-              CatCard(
-                Image.network(
-                  'https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg',
-                ),
-                'Cute Cat',
-              ),
-              CatCard(
-                Image.network(
-                  'https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg',
-                ),
-                'Cute Cat',
-              ),
+              CatCard('https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg', ''),
+              CatCard('https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg', ''),
+              CatCard('https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg', ''),
             ],
           ),
         ),

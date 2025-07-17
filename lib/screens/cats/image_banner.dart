@@ -9,6 +9,7 @@ class ImageBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(color: Colors.grey),
+      constraints: BoxConstraints(minHeight: 200.0, maxHeight: 250.0),
       child: Image.network(_imageUrl, fit: BoxFit.cover),
     );
   }

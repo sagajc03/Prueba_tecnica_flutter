@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class CatCard extends StatefulWidget {
-  final Image _catImage;
+  final String _catImageUrl;
   final String _catBreed;
 
-  const CatCard(this._catImage, String catBreed, {super.key})
+  const CatCard(this._catImageUrl, String catBreed, {super.key})
     : _catBreed = catBreed;
 
   @override
@@ -19,8 +19,8 @@ class _CatCardState extends State<CatCard> {
     return Card(
       child: Column(
         children: [
-          Image(
-            image: widget._catImage.image,
+          Image.network(
+            widget._catImageUrl, // Placeholder image URL
             height: 200,
             width: double.infinity,
             fit: BoxFit.cover,

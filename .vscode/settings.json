@@ -1,4 +1,5 @@
 {
   "editor.defaultFormatter": null,
-  "workbench.colorTheme": "Visual Studio 2019 Dark"
+  "workbench.colorTheme": "Visual Studio 2019 Dark",
+  "cmake.ignoreCMakeListsMissing": true
 }
