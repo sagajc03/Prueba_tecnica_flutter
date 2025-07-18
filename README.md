@@ -16,11 +16,12 @@ Al iniciar esta aplicación, se encontrara con 3 elementos principales:
 + Botón de agregar imagen aleatoria
 
 #### Lista de imagenes
-Cada elemento de la lista de imagenes presenta una imagen y el id de la imagen.  
-Al hacer clic en la imagen, esta te muestra la **pantalla de detalles**
+Cada elemento de la lista de imagenes presenta una imagen y el id de la imagen.   
+Esta lista de imagenes se inicia por defecto con 10 imagenes.  
+Al hacer clic en la imagen, esta te muestra la **pantalla de detalles**.
 
 > **Pantalla de detalles**  
->En esta pantalla es posible ver la imagen completa, así los detalles de la imagen, es decir:
+>En esta pantalla es posible ver la imagen completa, así como los detalles de la imagen, es decir:
 > + **Id** de la imagen 
 > + Ancho (Width)
 > + Alto (Height)
@@ -57,7 +58,10 @@ cat.dart (models)
       //... codigo para consultar a la api
     }
 
-Cuando se consulta los detalles de una imagen, se busca dentro del provider para reutilizar los datos del mismo.
+Cuando se agrega una imagen, se hace una llamada a Cat.fetchRandomCat() desde el provider de la siguiente manera, lo que lo agrega a la lista en el estado.
+
+
+Cuando se consulta los detalles de una imagen, se busca dentro del estado del provider para reutilizar los datos del mismo.
 
 
 ## Proceso de desarrollo
