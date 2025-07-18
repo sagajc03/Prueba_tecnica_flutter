@@ -1,28 +1,56 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'providers/cat_provider.dart';
 import '../cats/cat_card.dart';
-import '../../models/cat.dart';
 
 class HomeScreen extends StatelessWidget {
-  // Uses the cat api to display images of cats
-  final Future<List<Cat>> catsFuture = Cat.fetch10Cats();
-  // Implementing the api
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Imagenes de Gatos con API')),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              CatCard('https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg', ''),
-              CatCard('https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg', ''),
-              CatCard('https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg', ''),
-            ],
-          ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Provider.of<CatProvider>(context, listen: false).addRandomCat();
+        },
+        child: Icon(Icons.add),
+      ),
+      appBar: AppBar(
+        title: Text(
+          "Number of Cats: ${Provider.of<CatProvider>(context).getNumberOfCats()}",
         ),
+      ),
+      body: SafeArea(
+        child: Consumer<CatProvider>(
+          builder: (context, catProvider, child) {
+            if (catProvider.cats.isEmpty) {
+              return Center(child: CircularProgressIndicator());
+            } else {
+              return CatListColumn(cats: catProvider.cats);
+            }
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class CatListColumn extends StatelessWidget {
+  final List cats;
+  const CatListColumn({super.key, required this.cats});
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: cats.map<Widget>((cat) {
+          return CatCard(
+            cat.url,
+            cat.breeds.isNotEmpty
+                ? cat.breeds[0]['name']
+                : (cat.id.isNotEmpty ? "ID: ${cat.id}" : 'Unknown ID'),
+          );
+        }).toList(),
       ),
     );
   }

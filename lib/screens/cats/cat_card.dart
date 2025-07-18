@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 
 class CatCard extends StatefulWidget {
   final String _catImageUrl;
-  final String _catBreed;
+  final String _catId;
 
-  const CatCard(this._catImageUrl, String catBreed, {super.key})
-    : _catBreed = catBreed;
+  const CatCard(this._catImageUrl, this._catId, {super.key});
 
   @override
   State<CatCard> createState() => _CatCardState();
@@ -28,7 +27,7 @@ class _CatCardState extends State<CatCard> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              widget._catBreed.isEmpty ? 'Unknown Breed' : widget._catBreed,
+              widget._catId.isEmpty ? 'Unknown Id' : widget._catId,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
           ),
