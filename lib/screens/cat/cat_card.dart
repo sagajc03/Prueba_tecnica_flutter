@@ -1,17 +1,10 @@
 import 'package:flutter/material.dart';
 
-class CatCard extends StatefulWidget {
+class CatCard extends StatelessWidget {
   final String _catImageUrl;
   final String _catId;
 
   const CatCard(this._catImageUrl, this._catId, {super.key});
-
-  @override
-  State<CatCard> createState() => _CatCardState();
-}
-
-class _CatCardState extends State<CatCard> {
-  bool liked = false;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +12,7 @@ class _CatCardState extends State<CatCard> {
       child: Column(
         children: [
           Image.network(
-            widget._catImageUrl, // Placeholder image URL
+            _catImageUrl,
             height: 200,
             width: double.infinity,
             fit: BoxFit.cover,
@@ -27,26 +20,9 @@ class _CatCardState extends State<CatCard> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              widget._catId.isEmpty ? 'Unknown Id' : widget._catId,
+              _catId.isEmpty ? 'Unknown Id' : _catId,
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-          ),
-          TextButton(
-            style: ButtonStyle(
-              backgroundColor: WidgetStateProperty.all<Color>(Colors.blue),
-              foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
-            ),
-            onPressed: () {
-              setState(() {
-                liked = !liked;
-              });
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(liked ? 'Liked' : 'Unliked')),
-              );
-              // Here you would typically call a method to update the state
-              // in your provider, e.g., CatProvider.addLike(catId);
-            },
-            child: Text(liked ? 'Liked' : 'Like'),
           ),
         ],
       ),

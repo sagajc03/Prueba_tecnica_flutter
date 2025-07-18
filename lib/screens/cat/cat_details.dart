@@ -1,46 +1,44 @@
 import 'package:flutter/material.dart';
-import '../cats/cat/Image_banner.dart';
+import 'package:provider/provider.dart';
+import 'Image_banner.dart';
 import 'text_section.dart';
-import '../../models/cat.dart';
+import '../cats/providers/cat_provider.dart';
 
 class CatDetails extends StatelessWidget {
-  CatDetails({super.key});
+  final String catId;
 
-  final Future<List<Cat>> catsFuture = Cat.fetch10Cats();
+  const CatDetails({super.key, required this.catId});
 
   @override
   Widget build(BuildContext context) {
+    // Recupera el gato del provider
+    final catProvider = Provider.of<CatProvider>(context, listen: false);
+    final cat = catProvider.getCatById(catId);
+
+    // Si no existe, puedes mostrar un mensaje o hacer fetch manualmente si lo deseas
+    if (cat.id.isEmpty) {
+      return Scaffold(
+        appBar: AppBar(title: Text('Cat Image Details')),
+        body: Center(child: Text('No cat found with id $catId')),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(title: Text('Cat Image Details')),
-      body: FutureBuilder<List<Cat>>(
-        future: catsFuture,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No cats found.'));
-          } else {
-            // Example: Use the first cat's data
-            final cat = snapshot.data![0];
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  ImageBanner(cat.url),
-                  TextSection('Id', cat.id),
-                  TextSection(
-                    'Cat Breed',
-                    cat.breeds.isNotEmpty ? cat.breeds[0]['name'] : 'Unknown',
-                  ),
-                  TextSection('Width', '${cat.width}px'),
-                  TextSection('Height', '${cat.height}px'),
-                  TextSection('Url', cat.url),
-                ],
-              ),
-            );
-          }
-        },
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            ImageBanner(cat.url),
+            TextSection('Id', cat.id),
+            TextSection(
+              'Cat Breed',
+              cat.breeds.isNotEmpty ? cat.breeds[0]['name'] : 'Unknown',
+            ),
+            TextSection('Width', '${cat.width}px'),
+            TextSection('Height', '${cat.height}px'),
+            TextSection('Url', cat.url),
+          ],
+        ),
       ),
     );
   }

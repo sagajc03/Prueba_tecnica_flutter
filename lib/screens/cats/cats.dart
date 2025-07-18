@@ -4,6 +4,8 @@ import 'providers/cat_provider.dart';
 import '../cat/cat_card.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,13 +53,20 @@ class CatListColumn extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: cats.map<Widget>((cat) {
-        return CatCard(
-          cat.url,
-          cat.breeds.isNotEmpty
-              ? cat.breeds[0]['name']
-              : (cat.id.isNotEmpty ? "ID: ${cat.id}" : 'Unknown ID'),
+        return GestureDetector(
+          onTap: () => _onCatTap(context, cat.id),
+          child: CatCard(
+            cat.url,
+            cat.breeds.isNotEmpty
+                ? cat.breeds[0]['name']
+                : (cat.id.isNotEmpty ? "ID: ${cat.id}" : 'Unknown ID'),
+          ),
         );
       }).toList(),
     );
+  }
+
+  _onCatTap(BuildContext context, String catId) {
+    Navigator.pushNamed(context, '/catDetails', arguments: {'catId': catId});
   }
 }

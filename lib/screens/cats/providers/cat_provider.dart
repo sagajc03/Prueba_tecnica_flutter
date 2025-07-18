@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:prueba/models/cat.dart';
 
 class CatProvider extends ChangeNotifier {
@@ -13,7 +13,9 @@ class CatProvider extends ChangeNotifier {
           notifyListeners();
         })
         .catchError((error) {
-          print('Error fetching cats: $error');
+          if (kDebugMode) {
+            print('Error fetching cats: $error');
+          }
         });
   }
 
@@ -31,7 +33,9 @@ class CatProvider extends ChangeNotifier {
           notifyListeners();
         })
         .catchError((error) {
-          print('Error fetching cats: $error');
+          if (kDebugMode) {
+            print('Error fetching cats: $error');
+          }
         });
   }
 
@@ -43,7 +47,9 @@ class CatProvider extends ChangeNotifier {
           notifyListeners();
         })
         .catchError((error) {
-          print('Error fetching random cat: $error');
+          if (kDebugMode) {
+            print('Error fetching random cat: $error');
+          }
         });
   }
 
@@ -55,7 +61,9 @@ class CatProvider extends ChangeNotifier {
           notifyListeners();
         })
         .catchError((error) {
-          print('Error fetching cat: $error');
+          if (kDebugMode) {
+            print('Error fetching cat: $error');
+          }
         });
   }
 
