@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/cat_provider.dart';
-import '../cats/cat_card.dart';
+import '../cat/cat_card.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -24,7 +24,15 @@ class HomeScreen extends StatelessWidget {
             if (catProvider.cats.isEmpty) {
               return Center(child: CircularProgressIndicator());
             } else {
-              return CatListColumn(cats: catProvider.cats);
+              return ListView(
+                children: [
+                  ElevatedButton(
+                    onPressed: () => catProvider.resetList(),
+                    child: Text('Reset List'),
+                  ),
+                  CatListColumn(cats: catProvider.cats),
+                ],
+              );
             }
           },
         ),
@@ -39,19 +47,17 @@ class CatListColumn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: cats.map<Widget>((cat) {
-          return CatCard(
-            cat.url,
-            cat.breeds.isNotEmpty
-                ? cat.breeds[0]['name']
-                : (cat.id.isNotEmpty ? "ID: ${cat.id}" : 'Unknown ID'),
-          );
-        }).toList(),
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: cats.map<Widget>((cat) {
+        return CatCard(
+          cat.url,
+          cat.breeds.isNotEmpty
+              ? cat.breeds[0]['name']
+              : (cat.id.isNotEmpty ? "ID: ${cat.id}" : 'Unknown ID'),
+        );
+      }).toList(),
     );
   }
 }

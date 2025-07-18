@@ -17,6 +17,12 @@ class CatProvider extends ChangeNotifier {
         });
   }
 
+  void resetList() {
+    _cats.clear();
+    notifyListeners();
+    fetchCats();
+  }
+
   void fetchCats() {
     Future<List<Cat>> catsFuture = Cat.fetch10Cats();
     catsFuture
@@ -55,6 +61,13 @@ class CatProvider extends ChangeNotifier {
 
   int getNumberOfCats() {
     return _cats.length;
+  }
+
+  Cat getCatById(String id) {
+    return _cats.firstWhere(
+      (cat) => cat.id == id,
+      orElse: () => Cat('', '', 0, 0, []),
+    );
   }
 
   List<Cat> get cats => _cats;

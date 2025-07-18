@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'screens/home/home.dart';
-import 'screens/cats/cat_details.dart';
+import 'screens/cats/cats.dart';
+import 'screens/cat/cat_details.dart';
 import 'style.dart';
-import 'screens/home/providers/cat_provider.dart';
+import 'screens/cats/providers/cat_provider.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
