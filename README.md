@@ -15,6 +15,8 @@ Al iniciar esta aplicación, se encontrara con 3 elementos principales:
 + Botón de reiniciar lista
 + Botón de agregar imagen aleatoria
 
+![Pantalla de Inicio](imagesReadme/PantallaDeInicio.png)
+
 #### Lista de imagenes
 Cada elemento de la lista de imagenes presenta una imagen y el id de la imagen.   
 Esta lista de imagenes se inicia por defecto con 10 imagenes.  
@@ -27,6 +29,7 @@ Al hacer clic en la imagen, esta te muestra la **pantalla de detalles**.
 > + Alto (Height)
 > + Url
 > + Raza del gato (Breed)
+> ![Pantalla de detalles](imagesReadme/PantallaDeDetalles.png)
 
 #### Botón de reiniciar lista
 Este botón elimina los elementos existentes de la lista, y llama a otros 10 aleatorios nuevos
