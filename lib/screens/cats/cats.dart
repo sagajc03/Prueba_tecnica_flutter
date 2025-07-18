@@ -57,9 +57,7 @@ class CatListColumn extends StatelessWidget {
           onTap: () => _onCatTap(context, cat.id),
           child: CatCard(
             cat.url,
-            cat.breeds.isNotEmpty
-                ? cat.breeds[0]['name']
-                : (cat.id.isNotEmpty ? "ID: ${cat.id}" : 'Unknown ID'),
+            cat.id.isNotEmpty ? "ID: ${cat.id}" : 'Unknown ID',
           ),
         );
       }).toList(),
