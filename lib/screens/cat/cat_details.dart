@@ -11,11 +11,9 @@ class CatDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Recupera el gato del provider
     final catProvider = Provider.of<CatProvider>(context, listen: false);
     final cat = catProvider.getCatById(catId);
 
-    // Si no existe, puedes mostrar un mensaje o hacer fetch manualmente si lo deseas
     if (cat.id.isEmpty) {
       return Scaffold(
         appBar: AppBar(title: Text('Cat Image Details')),
